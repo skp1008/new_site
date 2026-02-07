@@ -40,7 +40,11 @@
       "dest": "/frontend/sql-query-generator.html"
     },
     {
-      "src": "/(.*\\.(png|jpg|jpeg|gif|css|js|pdf))",
+      "src": "/quant-proj",
+      "dest": "/frontend/quant_proj.html"
+    },
+    {
+      "src": "/(.*\\.(png|jpg|jpeg|gif|css|js|pdf|json))",
       "dest": "/frontend/$1"
     },
     {

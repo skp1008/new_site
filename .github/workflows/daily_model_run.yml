@@ -1,0 +1,65 @@
+name: Daily Model Run
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Run model and generate results
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: |
+          python run_model_github_actions.py
+      
+      - name: Verify results were written
+        run: |
+          PREDS=$(python -c "import json; d=json.load(open('frontend/cached_results.json')); print(len(d.get('predictions', [])))")
+          echo "Predictions count: $PREDS"
+          if [ "$PREDS" = "0" ]; then
+            echo "::error::No predictions in cached_results.json - frontend will show 'No model data'"
+            exit 1
+          fi
+      
+      - name: Commit and push results
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add frontend/cached_results.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit (file unchanged)"
+          else
+            # Use a message without [skip ci] so Vercel (and other CI) still deploy
+            git commit -m "chore: update cached model results"
+            git push origin HEAD
+          fi
+          echo "Latest frontend/cached_results.json (first 500 chars):"
+          head -c 500 frontend/cached_results.json || true
