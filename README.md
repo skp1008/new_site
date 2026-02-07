@@ -1,58 +1,29 @@
-# Krishna Paudel — Portfolio Website
+# Krishna Paudel - Portfolio Website
 
-A modern, responsive personal website that highlights my background, projects, and tools I built for the City of Delta. The site is designed for clarity, speed, and a polished experience on desktop and mobile.
+Personal portfolio website with an integrated quantitative stock analysis platform.
 
-## ✨ Highlights
-- Clean, high‑contrast UI with animated tech background and smooth interactions
-- Fully responsive layout with thoughtful mobile tweaks
-- Clear navigation to About, Projects, City of Delta tools, and Contact
-- Fast, static delivery (no backend required for browsing)
-- Working contact form powered by EmailJS
+## Structure
 
-## 🗺️ Pages
-- `index.html` — Home/About
-  - Education, work experience, certificates, and skills
-  - Social links and resume download
-- `projects.html` — Project summaries and links to demo pages
-- Tools (demo UIs):
-  - `meter-form-processor.html`
-  - `single-occupancy-discount.html`
-  - `secondary-suite-exemption.html`
-  - `water-consumption-anomaly.html`
-  - `sql-query-generator.html` (UI only; shows Access Denied in static mode)
-- `contact.html` — Contact form (EmailJS) with copy‑email utility
-
-## 🧩 How to Use
-- Navigate via the top bar to sections and pages
-- Use Projects to jump to specific tool demos
-- Contact page supports sending a message via EmailJS, or copying the email address directly
-
-## 🛠️ Tech Stack
-- HTML, CSS, vanilla JavaScript
-- Google Fonts (Inter)
-- EmailJS (contact form)
-
-## 📁 Structure (key files)
 ```
-frontend/
-├── index.html
-├── projects.html
-├── contact.html
-├── meter-form-processor.html
-├── single-occupancy-discount.html
-├── secondary-suite-exemption.html
-├── water-consumption-anomaly.html
-├── sql-query-generator.html
-├── [images + resume PDFs]
+frontend/               # Static site (deployed to Vercel)
+  index.html            # Main portfolio page
+  quant_proj.html       # Stock analysis dashboard
+  quant_app.js          # Dashboard JS (reads cached_results.json)
+  cached_results.json   # Model output (auto-updated by GitHub Actions)
+  contact.html          # Contact page
+  projects.html         # Projects page
+  *.html                # Other sub-pages
+  *.png, *.pdf          # Assets
+
+model.py                        # XGBoost stock prediction model
+run_model_github_actions.py     # Script that runs model + saves JSON
+requirements.txt                # Python deps (GitHub Actions only)
+.github/workflows/
+  daily_model_run.yml           # Cron: runs model daily, commits new JSON
 ```
 
-## 🔒 Notes on Tool Demos
-- SQL Query Generator runs in UI‑only mode for the static site and will display “Access Denied” (backend intentionally disabled)
-- Other tool pages showcase the UX without requiring a server
+## How it works
 
-## 📫 Contact
-- Email: `jaskp1008@gmail.com`
-- LinkedIn: https://www.linkedin.com/in/krishna-paudel-4705a3262/
-- GitHub: https://github.com/skp1008
-
-— Built with care by Krishna Paudel
+- **Vercel** serves the `frontend/` folder as a static site.
+- **GitHub Actions** runs `run_model_github_actions.py` daily (cron), which executes `model.py`, generates predictions, and commits `frontend/cached_results.json`.
+- The quant dashboard (`quant_proj.html`) loads `cached_results.json` on page load to render charts and predictions.

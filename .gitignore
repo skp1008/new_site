@@ -1,76 +1,27 @@
-# Dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# OS
+.DS_Store
+Thumbs.db
 
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDE files
+# IDE
 .vscode/
 .idea/
 *.swp
-*.swo
 
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Logs
-logs
-*.log
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-
-# Temporary files
-*.tmp
-*.temp
-
-# Build files
-dist/
-build/
-
-# Backend files (not needed for frontend deployment)
+# Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
-*.so
-.tox
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# Virtual environments
+.venv/
 venv/
 env/
-ENV/
+config.py
+
+# Node
+node_modules/
+
+# Env
+.env
+.env.*
+
+# Misc
+*.log
+*.tmp

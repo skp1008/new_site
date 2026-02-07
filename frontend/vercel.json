@@ -1,6 +1,4 @@
 {
-  "version": 2,
-  "outputDirectory": ".",
   "rewrites": [
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/projects", "destination": "/projects.html" },
@@ -9,16 +7,6 @@
     { "source": "/secondary-suite-exemption", "destination": "/secondary-suite-exemption.html" },
     { "source": "/water-consumption-anomaly", "destination": "/water-consumption-anomaly.html" },
     { "source": "/sql-query-generator", "destination": "/sql-query-generator.html" },
-    { "source": "/quant-proj", "destination": "/quant_proj.html" },
-    { "source": "/", "destination": "/index.html" }
-  ],
-  "headers": [
-    {
-      "source": "/cached_results.json",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
-      ]
-    }
+    { "source": "/quant-proj", "destination": "/quant_proj.html" }
   ]
 }

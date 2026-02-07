@@ -17,8 +17,8 @@ async function loadData() {
     
     try {
         // Fetch the JSON file
-        console.log('📡 Fetching /frontend/cached_results.json...');
-        const response = await fetch('/frontend/cached_results.json');
+        console.log('📡 Fetching /cached_results.json...');
+        const response = await fetch('/cached_results.json');
         
         console.log('📥 Response status:', response.status, response.statusText);
         console.log('📥 Content-Type:', response.headers.get('content-type'));
