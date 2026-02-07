@@ -1,55 +1,56 @@
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "frontend/**/*",
-      "use": "@vercel/static"
+      "source": "/contact",
+      "destination": "/frontend/contact.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/frontend/projects.html"
+    },
+    {
+      "source": "/meter-form-processor",
+      "destination": "/frontend/meter-form-processor.html"
+    },
+    {
+      "source": "/single-occupancy-discount",
+      "destination": "/frontend/single-occupancy-discount.html"
+    },
+    {
+      "source": "/secondary-suite-exemption",
+      "destination": "/frontend/secondary-suite-exemption.html"
+    },
+    {
+      "source": "/water-consumption-anomaly",
+      "destination": "/frontend/water-consumption-anomaly.html"
+    },
+    {
+      "source": "/sql-query-generator",
+      "destination": "/frontend/sql-query-generator.html"
+    },
+    {
+      "source": "/quant-proj",
+      "destination": "/frontend/quant_proj.html"
+    },
+    {
+      "source": "/",
+      "destination": "/frontend/index.html"
     }
   ],
-  "routes": [
+  "headers": [
     {
-      "src": "/",
-      "dest": "/frontend/index.html"
-    },
-    {
-      "src": "/contact",
-      "dest": "/frontend/contact.html"
-    },
-    {
-      "src": "/projects",
-      "dest": "/frontend/projects.html"
-    },
-    {
-      "src": "/meter-form-processor",
-      "dest": "/frontend/meter-form-processor.html"
-    },
-    {
-      "src": "/single-occupancy-discount",
-      "dest": "/frontend/single-occupancy-discount.html"
-    },
-    {
-      "src": "/secondary-suite-exemption",
-      "dest": "/frontend/secondary-suite-exemption.html"
-    },
-    {
-      "src": "/water-consumption-anomaly",
-      "dest": "/frontend/water-consumption-anomaly.html"
-    },
-    {
-      "src": "/sql-query-generator",
-      "dest": "/frontend/sql-query-generator.html"
-    },
-    {
-      "src": "/quant-proj",
-      "dest": "/frontend/quant_proj.html"
-    },
-    {
-      "src": "/(.*\\.(png|jpg|jpeg|gif|css|js|pdf|json))",
-      "dest": "/frontend/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/$1"
+      "source": "/frontend/cached_results.json",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
     }
   ]
 }
